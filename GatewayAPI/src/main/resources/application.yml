@@ -33,9 +33,14 @@ spring:
           lower-case-service-id: true
       routes:
         - id: patient-service
-          uri: lb://patient-serviice
+          uri: http://localhost:8584
           predicates:
             - Path=/patients/**
+
+        - id: facture-service
+          uri: http://localhost:8585
+          predicates:
+             - Path=/factures/**
 
 eureka:
   client:

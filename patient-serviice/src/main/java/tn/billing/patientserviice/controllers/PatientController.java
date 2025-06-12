@@ -3,6 +3,8 @@ package tn.billing.patientserviice.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 import tn.billing.patientserviice.dto.FactureRequestDto;
 import tn.billing.patientserviice.dto.PatientDto;
@@ -12,6 +14,7 @@ import tn.billing.patientserviice.services.IPatientService;
 import java.time.LocalDate;
 import java.util.List;
 
+@RefreshScope
 @RestController
 @RequestMapping("/patients")
 @RequiredArgsConstructor
@@ -21,7 +24,8 @@ public class PatientController {
 
     private final IPatientService service;
     private final FactureClient factureClient;
-
+    @Value("${custom.message}")
+    private String customMessage;
 
     @PostMapping()
     public PatientDto add(@RequestBody PatientDto dto) {
@@ -55,5 +59,8 @@ public class PatientController {
         return factureClient.addFacture(facture);
     }
 
-
+    @GetMapping("/message")
+    public String getMessage() {
+        return customMessage;
+    }
 }
