@@ -10,7 +10,7 @@ import tn.billing.patientserviice.dto.FactureRequestDto;
 
 import java.util.List;
 
-@FeignClient(name = "facturation-service", url = "http://localhost:8585/facture")
+@FeignClient(name = "facturation-service", url = "http://localhost:8585")
 public interface FactureClient {
 
     @PostMapping("/factures")
